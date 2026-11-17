@@ -1,0 +1,21 @@
+{
+  "name": "Butter Valley",
+  "short_name": "Butter Valley",
+  "description": "Pakistani food manufacturer and exporter of Pink Himalayan Salt, artisanal nut butters, pure spices, recipe mixes, desserts and organic botanicals.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#382319",
+  "background_color": "#F7F0E3",
+  "icons": [
+    {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

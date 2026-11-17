@@ -1,0 +1,6 @@
+{
+  "name": "Butter Valley Ltd.",
+  "description": "Pakistani food manufacturer and international exporter supplying Pink Himalayan Salt, artisanal nut spreads, pure spices, recipe mixes, desserts, organic Shilajit and pure saffron.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
