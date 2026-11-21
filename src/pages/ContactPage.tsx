@@ -33,7 +33,7 @@ export function ContactPage() {
             <p className="text-xs sm:text-sm font-medium tracking-[0.14em] uppercase text-[#C99536]">
               Wholesale &amp; Export Inquiries
             </p>
-            <h1 className="font-serif text-4xl sm:text-6xl font-semibold text-[#382319] leading-[1.08]">
+            <h1 className="font-serif text-[2.125rem] sm:text-5xl lg:text-[3.5rem] font-semibold text-[#382319] leading-[1.14] sm:leading-[1.1]">
               Let's Start a Conversation
             </h1>
             <p className="text-base sm:text-xl text-[#59351F] leading-relaxed">
@@ -85,22 +85,33 @@ export function ContactPage() {
 
                   <div className="flex items-start gap-3.5">
                     <Phone className="w-5 h-5 text-[#C99536] shrink-0 mt-0.5" />
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-xs font-medium uppercase tracking-wider text-[#78836A]">
                         Telephone &amp; WhatsApp
                       </p>
-                      <div className="mt-1 space-y-1.5">
-                        <p className="text-sm sm:text-base font-semibold text-[#382319]">
-                          WhatsApp:{' '}
-                          <a
-                            href="https://wa.me/923360359225"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-[#C99536] transition-colors underline underline-offset-4 decoration-[#C99536]/60"
-                          >
-                            +92 336 0359225
-                          </a>
-                        </p>
+                      <div className="mt-1.5 space-y-2">
+                        <div className="space-y-1">
+                          <p className="text-sm sm:text-base text-[#382319] flex flex-wrap items-baseline gap-x-2">
+                            <span className="font-semibold">WhatsApp:</span>
+                            <a
+                              href="https://wa.me/923360359225"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="font-semibold text-[#382319] hover:text-[#C99536] transition-colors underline underline-offset-4 decoration-[#C99536]/60 py-0.5"
+                            >
+                              +92 336 0359225
+                            </a>
+                          </p>
+                          <p className="text-sm sm:text-base text-[#382319] flex flex-wrap items-baseline gap-x-2">
+                            <span className="font-semibold">Call &amp; Text:</span>
+                            <a
+                              href="tel:+923153029801"
+                              className="font-semibold text-[#382319] hover:text-[#C99536] transition-colors underline underline-offset-4 decoration-[#C99536]/60 py-0.5"
+                            >
+                              +92 315 3029801
+                            </a>
+                          </p>
+                        </div>
                         <p className="text-sm text-[#59351F] leading-relaxed">
                           Connect with our team directly on WhatsApp for product inquiries,
                           wholesale quotations and export-related assistance.

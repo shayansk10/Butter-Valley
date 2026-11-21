@@ -3,6 +3,7 @@ export interface ProductSku {
   image: string;
   imageFit: 'contain' | 'cover';
   note?: string;
+  description?: string;
 }
 
 export interface ProductSpecification {
@@ -46,7 +47,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     id: 'nut-butters-spreads',
     slug: 'nut-butters-spreads',
     path: '/products/nut-butters-spreads',
-    name: 'Nut Butters & Spreads',
+    name: 'Artisanal Nut Butters & Spreads',
     shortName: 'Nut Butters',
     kicker: 'Artisanal Spreads · SITE Hyderabad',
     shortDescription:
@@ -392,9 +393,10 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
       'Authentic Pink Himalayan Salt sourced from Khewra Salt Mine in edible, spa, de-icing and industrial grades.',
     fullDescription:
       'Pink Himalayan Salt from the Khewra Salt Mine in Punjab, Pakistan, supplied in grades for food, spa and industrial use to wholesale buyers and export markets.',
-    heroImage: '/assets/aistudio/Pink_Himalayan_Salt_880df78b.jpeg',
-    heroImageFit: 'contain',
-    heroAlt: 'Butter Valley Pink Himalayan Salt stand-up pouch from Pakistan',
+    heroImage: '/assets/aistudio/Pink_Salt_67a7e523.png',
+    heroImageFit: 'cover',
+    heroAlt:
+      'Butter Valley Pink Himalayan Salt crystals in a ceramic bowl alongside raw salt rocks and a wooden scoop',
     seoTitle: 'Pink Himalayan Salt Exporter Pakistan | Bulk Pink Salt Supplier | Butter Valley Ltd.',
     seoDescription:
       'Direct Pink Himalayan Salt supplier from Khewra Salt Mine, Punjab, Pakistan. Available in edible, spa, de-icing and industrial grades for global wholesale export.',
@@ -445,8 +447,8 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     skus: [
       {
         name: 'Pink Himalayan Salt (Stand-Up Pouch)',
-        image: '/assets/aistudio/Pink_Himalayan_Salt_880df78b.jpeg',
-        imageFit: 'contain',
+        image: '/assets/aistudio/Pink_Salt_67a7e523.png',
+        imageFit: 'cover',
         note: 'Khewra origin culinary pouch',
       },
     ],
@@ -479,9 +481,10 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
       'Traditional dessert mixes (75g packs), vermicelli and pantry staples for festive tables and everyday cooking.',
     fullDescription:
       'Dessert mixes, vermicelli and pantry staples for everyday cooking and festive tables, supplied to wholesale buyers and export markets.',
-    heroImage: '/assets/aistudio/Dessert_f403ebb5.jpg',
-    heroImageFit: 'cover',
-    heroAlt: 'Traditional Pakistani dessert bowl garnished with pistachios, almonds and saffron',
+    heroImage: '/assets/aistudio/Butter_Valley_Mixes__Kheer___Sheer_Khurma_21d877f2.png',
+    heroImageFit: 'contain',
+    heroAlt:
+      'Butter Valley Badami Kheer Mix and Sheer Khurma Mix packs with almonds, pistachios, saffron and dates',
     seoTitle: 'Pakistani Dessert Mixes, Vermicelli & Pantry Staples Exporter | Butter Valley Ltd.',
     seoDescription:
       'Wholesale Pakistani dessert mixes including Badami Kheer Mix (75g), Sheer Khurma Mix (75g), vermicelli and pantry staples exported by Butter Valley Ltd.',
@@ -525,8 +528,8 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
       },
       {
         name: 'Traditional Dessert Presentation',
-        image: '/assets/aistudio/Dessert_f403ebb5.jpg',
-        imageFit: 'cover',
+        image: '/assets/aistudio/Butter_Valley_Mixes__Kheer___Sheer_Khurma_21d877f2.png',
+        imageFit: 'contain',
         note: 'Prepared with nuts and saffron',
       },
     ],
@@ -549,34 +552,47 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     ],
   },
   {
-    id: 'shilajit-saffron',
-    slug: 'shilajit-saffron',
-    path: '/products/shilajit-saffron',
-    name: 'Organic Shilajit & Pure Saffron',
-    shortName: 'Shilajit & Saffron',
-    kicker: 'Natural Heritage & Culinary Botanicals',
+    id: 'shilajit',
+    slug: 'shilajit',
+    path: '/products/shilajit',
+    name: 'Shilajit',
+    shortName: 'Shilajit',
+    kicker: 'Natural Mountain Heritage · Resin & Raw Mineral',
     shortDescription:
-      'Carefully sourced organic Shilajit and pure saffron (zafraan), supplied to wholesale buyers and international export markets.',
+      'Authentic Himalayan Shilajit in Pure Shilajit Resin (liquid) and Natural Raw Shilajit (solid) forms for wholesale and export markets.',
     fullDescription:
-      'Premium organic Shilajit and pure saffron (zafraan), supplied to wholesale buyers and export markets.',
-    heroImage: '/assets/aistudio/organic_Shilajit___Pure_Saffron_5afc8e49.jpg',
-    heroImageFit: 'cover',
-    heroAlt: 'Glass jar of pure crimson saffron threads beside a jar of organic Shilajit resin',
-    seoTitle: 'Organic Shilajit & Pure Saffron Supplier Pakistan | Butter Valley Ltd.',
+      'Pure, carefully sourced Himalayan Shilajit (Salajit) from Pakistan, supplied in both natural liquid resin and original solid mineral forms to specialty wholesale buyers and international export markets.',
+    heroImage: '/assets/aistudio/Butter_Valley_Shilajit_Nature_Poster_9d26d1db.png',
+    heroImageFit: 'contain',
+    heroAlt:
+      'Butter Valley Himalayan Shilajit pure resin jar and natural raw Shilajit mineral pieces set in mountain greenery',
+    seoTitle: 'Pure Shilajit Resin & Natural Raw Shilajit Exporter Pakistan | Butter Valley Ltd.',
     seoDescription:
-      'Wholesale exporter of organic Shilajit and pure saffron (zafraan) from Pakistan for international specialty buyers and distributors.',
+      'Wholesale exporter of Pure Shilajit Resin (liquid) and Natural Raw Shilajit (solid) from Pakistan for international specialty buyers and distributors.',
     highlightsTitle: 'Product Range',
-    highlights: ['Organic Shilajit', 'Pure Saffron (Zafraan)'],
+    highlights: [
+      'Pure Shilajit Resin (Liquid)',
+      'Natural Raw Shilajit (Solid)',
+      'Natural Mineral Richness',
+      'Wholesale & Export Supply',
+    ],
     specifications: [
-      { label: 'Product Range', value: 'Organic Shilajit & Pure Saffron (Zafraan)' },
-      { label: 'Product Format', value: 'Resin & whole crimson saffron threads' },
+      { label: 'Product Category', value: 'Himalayan Shilajit (Salajit)' },
+      { label: 'Available Formats', value: 'Pure Shilajit Resin (Liquid) & Natural Raw Shilajit (Solid)' },
       { label: 'Origin & Handling', value: 'Sourced and supplied by Butter Valley Ltd., Pakistan' },
       { label: 'Quality Control', value: 'Purity testing & PCSIR test report' },
       { label: 'Export Compliance', value: 'PSW Registration & Chamber of Commerce Membership' },
       { label: 'Export Markets', value: 'UAE, Saudi Arabia, United Kingdom, United States' },
     ],
     packagingInfo: [
-      { label: 'Container Format', value: 'Sealed glass jars for specialty & wholesale supply' },
+      {
+        label: 'Pure Shilajit Resin',
+        value: 'Natural liquid resin format in sealed containers for specialty retail & wholesale supply',
+      },
+      {
+        label: 'Natural Raw Shilajit',
+        value: 'Original solid mineral form prepared for wholesale & export supply',
+      },
       { label: 'Export Markets', value: 'UAE, Saudi Arabia, United Kingdom, United States' },
     ],
     qualityHighlights: [
@@ -588,17 +604,27 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
       'Supplied to specialty wholesalers and international buyers in the UAE, Saudi Arabia, United Kingdom and United States.',
     skus: [
       {
-        name: 'Pure Saffron (Zafraan) & Organic Shilajit',
-        image: '/assets/aistudio/organic_Shilajit___Pure_Saffron_5afc8e49.jpg',
+        name: 'Pure Shilajit Resin',
+        image: '/assets/aistudio/Shilajit_liquid_5eb289a9.png',
         imageFit: 'cover',
-        note: 'Supplied for wholesale & export inquiry',
+        note: 'Natural Liquid Resin Form',
+        description:
+          'Premium-quality Shilajit in natural resin form, carefully sourced and presented for customers seeking authentic Himalayan Shilajit.',
+      },
+      {
+        name: 'Natural Raw Shilajit',
+        image: '/assets/aistudio/Shilajit_Hard_e93697ba.png',
+        imageFit: 'cover',
+        note: 'Original Solid Mineral Form',
+        description:
+          'Natural raw Shilajit in its original solid mineral form, carefully sourced and prepared for wholesale and export supply.',
       },
     ],
     faqs: [
       {
-        question: 'How are Organic Shilajit and Pure Saffron packaged for wholesale buyers?',
+        question: 'Which forms of Shilajit does Butter Valley supply?',
         answer:
-          'Organic Shilajit resin and Pure Saffron (Zafraan) threads are supplied in sealed glass jars tailored for specialty retail and wholesale export channels.',
+          'We supply two distinct formats: Pure Shilajit Resin in natural liquid resin form, and Natural Raw Shilajit in its original solid mineral form for wholesale and export buyers.',
       },
       {
         question: 'Can buyers request batch purity testing documentation?',
@@ -606,14 +632,151 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
           'Yes, quality control documentation and test report details can be requested directly through our wholesale inquiry form.',
       },
       {
-        question: 'Which markets do you currently export to?',
+        question: 'Which markets do you export Shilajit to?',
         answer:
-          'Butter Valley exports across established corridors including the United Arab Emirates, Saudi Arabia, the United Kingdom and the United States.',
+          'Butter Valley supplies international buyers across established trade corridors including the United Arab Emirates, Saudi Arabia, the United Kingdom and the United States.',
+      },
+    ],
+  },
+  {
+    id: 'zafran',
+    slug: 'zafran',
+    path: '/products/zafran',
+    name: 'Zafran (Saffron)',
+    shortName: 'Zafran (Saffron)',
+    kicker: 'Pure Culinary Botanicals · Crimson Threads',
+    shortDescription:
+      'Pure Zafran (Saffron) crimson threads carefully selected for aroma, color and culinary richness across wholesale export markets.',
+    fullDescription:
+      'Authentic pure Zafran (Saffron) whole crimson threads, handled and sealed for culinary specialty retailers, hospitality buyers and wholesale export markets.',
+    heroImage: '/assets/aistudio/Zaffron_0c43d86f.png',
+    heroImageFit: 'contain',
+    heroAlt:
+      'Crimson Zafran saffron threads in a white ceramic bowl and spoon beside a purple saffron flower with the Butter Valley Co. emblem',
+    seoTitle: 'Pure Zafran (Saffron) Wholesale Exporter Pakistan | Butter Valley Ltd.',
+    seoDescription:
+      'Wholesale exporter of pure Zafran (Saffron) whole crimson threads from Pakistan for international specialty retailers and food distributors.',
+    highlightsTitle: 'Product Range',
+    highlights: ['Whole Crimson Threads', 'Natural Aroma & Color', 'Sealed Glass Jars'],
+    specifications: [
+      { label: 'Product Category', value: 'Pure Zafran (Saffron)' },
+      { label: 'Product Format', value: 'Whole crimson saffron threads' },
+      { label: 'Origin & Handling', value: 'Selected and supplied by Butter Valley Ltd., Pakistan' },
+      { label: 'Quality Control', value: 'Purity verification & food handling compliance' },
+      { label: 'Export Compliance', value: 'PSW Registration & Chamber of Commerce Membership' },
+      { label: 'Export Markets', value: 'UAE, Saudi Arabia, United Kingdom, United States' },
+    ],
+    packagingInfo: [
+      { label: 'Container Format', value: 'Airtight sealed glass jars for specialty & wholesale supply' },
+      { label: 'Export Markets', value: 'UAE, Saudi Arabia, United Kingdom, United States' },
+    ],
+    qualityHighlights: [
+      'Carefully selected whole saffron threads preserving natural aroma and color',
+      'Handled in clean, hygienic packing conditions for international transit',
+      'Supported by PSW export registration and buyer compliance documentation',
+    ],
+    exportInfo:
+      'Supplied to specialty food importers, culinary distributors and retail buyers in the UAE, Saudi Arabia, United Kingdom and United States.',
+    skus: [
+      {
+        name: 'Pure Zafran (Saffron)',
+        image: '/assets/aistudio/Zaffron_0c43d86f.png',
+        imageFit: 'cover',
+        note: 'Whole crimson Zafran threads · Wholesale & export inquiry',
+      },
+    ],
+    faqs: [
+      {
+        question: 'How is Pure Zafran (Saffron) packaged for export?',
+        answer:
+          'Whole crimson Zafran threads are supplied in sealed containers designed to protect delicate aroma and pigment integrity during transit.',
+      },
+      {
+        question: 'Is Zafran available for specialty retail and foodservice buyers?',
+        answer:
+          'Yes, both wholesale foodservice buyers and specialty retailers can inquire for custom carton and order specifications.',
+      },
+      {
+        question: 'How can I request a wholesale quote for Zafran?',
+        answer:
+          'Click Request a Quote on this page and select Pure Zafran (Saffron) to connect directly with our export desk.',
+      },
+    ],
+  },
+  {
+    id: 'rhodes-grass',
+    slug: 'rhodes-grass',
+    path: '/products/rhodes-grass',
+    name: 'Rhodes Grass',
+    shortName: 'Rhodes Grass',
+    kicker: 'Agricultural & Livestock Export · Pakistan',
+    shortDescription:
+      'Premium quality Rhodes Grass, carefully sourced and prepared for international agricultural and livestock markets.',
+    fullDescription:
+      'Premium quality Rhodes Grass, carefully sourced and prepared for international agricultural and livestock markets. Supplied by Butter Valley Ltd. for wholesale forage buyers and regional livestock distributors.',
+    heroImage: '/assets/aistudio/Rhode_Grass_587a95be.png',
+    heroImageFit: 'cover',
+    heroAlt: 'Fresh lush green Rhodes Grass field with the Butter Valley Co. official emblem',
+    seoTitle: 'Rhodes Grass Exporter Pakistan | Agricultural & Livestock Forage | Butter Valley Ltd.',
+    seoDescription:
+      'Premium quality Rhodes Grass from Pakistan, carefully sourced and prepared by Butter Valley Ltd. for international agricultural and livestock markets.',
+    highlightsTitle: 'Forage & Supply Highlights',
+    highlights: [
+      'Livestock & Agricultural Supply',
+      'Carefully Sourced at Origin',
+      'Prepared for Export Transit',
+      'Wholesale Buyer Inquiries',
+    ],
+    specifications: [
+      { label: 'Product Category', value: 'Rhodes Grass (Agricultural Forage)' },
+      { label: 'Target Sector', value: 'International agricultural & livestock markets' },
+      { label: 'Supply Origin', value: 'Sourced and prepared in Pakistan' },
+      { label: 'Export Readiness', value: 'PSW Registered Exporter (UN-00-4901518)' },
+      { label: 'Compliance Documentation', value: 'Standard commercial & customs export documentation' },
+      { label: 'Buyer Coordination', value: 'Available for direct wholesale & bulk quotations' },
+    ],
+    packagingInfo: [
+      { label: 'Supply Format', value: 'Export-prepared bales for livestock & forage trade' },
+      { label: 'Export Markets', value: 'Gulf / Middle East & international agricultural buyers' },
+    ],
+    qualityHighlights: [
+      'Sourced and prepared with focus on cleanliness and consistent forage quality',
+      'Coordinated directly through Butter Valley Ltd. export channels in Pakistan',
+      'Supported by PSW export registration and Chamber of Commerce membership',
+    ],
+    exportInfo:
+      'Prepared for wholesale agricultural importers, livestock farms and forage distributors across international markets.',
+    skus: [
+      {
+        name: 'Rhodes Grass',
+        image: '/assets/aistudio/Rhode_Grass_587a95be.png',
+        imageFit: 'cover',
+        note: 'Agricultural & livestock forage · Wholesale export inquiry',
+      },
+    ],
+    faqs: [
+      {
+        question: 'Who is Butter Valley Rhodes Grass intended for?',
+        answer:
+          'Our Rhodes Grass is sourced and prepared specifically for international agricultural importers, livestock farms and wholesale forage buyers.',
+      },
+      {
+        question: 'How can I request wholesale specifications or pricing for Rhodes Grass?',
+        answer:
+          'Use our Request a Quote form and select Rhodes Grass, or connect with our team via WhatsApp or email with your destination port and volume requirements.',
+      },
+      {
+        question: 'Does Butter Valley handle export documentation for agricultural shipments?',
+        answer:
+          'Yes, our export desk is PSW registered and prepares standard export and commercial shipping documentation for qualified wholesale buyers.',
       },
     ],
   },
 ];
 
 export function getCategoryBySlug(slug: string): ProductCategory | undefined {
+  if (slug === 'shilajit-saffron') {
+    return PRODUCT_CATEGORIES.find((cat) => cat.slug === 'shilajit');
+  }
   return PRODUCT_CATEGORIES.find((cat) => cat.slug === slug);
 }

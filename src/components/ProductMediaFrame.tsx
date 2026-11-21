@@ -9,23 +9,25 @@ interface ProductMediaFrameProps {
   className?: string;
   imgClassName?: string;
   priority?: boolean;
+  compact?: boolean;
 }
 
 export function ProductMediaFrame({
   src,
   alt,
   fit = 'contain',
-  aspectClass = 'aspect-[4/5]',
+  aspectClass = 'aspect-square',
   className = '',
   imgClassName = '',
   priority = false,
+  compact = false,
 }: ProductMediaFrameProps) {
   const [hasError, setHasError] = useState(false);
 
   return (
     <div
       className={`relative overflow-hidden ${
-        fit === 'contain' ? 'bg-[#191411]' : 'bg-[#EFE6D5]'
+        fit === 'contain' ? 'bg-[#F7F0E3]' : 'bg-[#EFE6D5]'
       } ${aspectClass} ${className}`}
     >
       {!hasError ? (
@@ -37,7 +39,11 @@ export function ProductMediaFrame({
           referrerPolicy="no-referrer"
           onError={() => setHasError(true)}
           className={`w-full h-full transition-transform duration-700 ease-out ${
-            fit === 'contain' ? 'object-contain p-2 sm:p-3' : 'object-cover'
+            fit === 'contain'
+              ? compact
+                ? 'object-contain p-1'
+                : 'object-contain'
+              : 'object-cover'
           } ${imgClassName}`}
         />
       ) : (

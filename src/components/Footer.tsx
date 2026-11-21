@@ -9,7 +9,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#382319] text-[#F7F0E3] border-t border-[#C99536]/20">
+    <footer className="relative z-10 bg-[#382319] text-[#F7F0E3] border-t border-[#C99536]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
           {/* Brand Column */}
@@ -81,6 +81,11 @@ export function Footer() {
               <li>
                 <Link to="/products" className="hover:text-[#C99536] transition-colors">
                   Our Products
+                </Link>
+              </li>
+              <li>
+                <Link to="/our-team" className="hover:text-[#C99536] transition-colors">
+                  Our Team
                 </Link>
               </li>
               <li>
@@ -173,6 +178,20 @@ export function Footer() {
               Terms &amp; Conditions
             </Link>
           </nav>
+        </div>
+
+        <div className="mt-5 pt-4 border-t border-[#F7F0E3]/8 text-center">
+          <p className="text-[11px] sm:text-xs tracking-wide text-[#F7F0E3]/55">
+            Made by{' '}
+            <a
+              href="https://www.instagram.com/solve_xsolutions/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-[#C99536]/90 hover:text-[#FFFCF6] underline-offset-4 hover:underline transition-colors"
+            >
+              Solvex Solutions
+            </a>
+          </p>
         </div>
       </div>
     </footer>

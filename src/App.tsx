@@ -11,6 +11,7 @@ import { RequestQuoteModal } from './components/RequestQuoteModal';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
+import { OurTeamPage } from './pages/OurTeamPage';
 import { ProductsOverviewPage } from './pages/ProductsOverviewPage';
 import { ProductDetailPage } from './pages/ProductDetailPage';
 import { QualityPage } from './pages/QualityPage';
@@ -26,6 +27,7 @@ function PageView() {
   const renderPage = () => {
     if (pathname === '/') return <HomePage />;
     if (pathname === '/about') return <AboutPage />;
+    if (pathname === '/our-team') return <OurTeamPage />;
     if (pathname === '/products') return <ProductsOverviewPage />;
     if (pathname === '/quality') return <QualityPage />;
     if (pathname === '/export') return <ExportPage />;

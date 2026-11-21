@@ -113,7 +113,7 @@ export function Header() {
   };
 
   const linkClass = (active: boolean) =>
-    `relative py-1 text-sm font-medium whitespace-nowrap shrink-0 transition-colors duration-200 after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[1.5px] after:bg-[#C99536] after:transition-all after:duration-200 ${
+    `relative py-1 text-[13px] xl:text-sm font-medium whitespace-nowrap shrink-0 transition-colors duration-200 after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[1.5px] after:bg-[#C99536] after:transition-all after:duration-200 ${
       active ? 'after:w-full' : 'after:w-0 hover:after:w-full'
     } ${
       isTransparent
@@ -133,7 +133,7 @@ export function Header() {
           : 'bg-[#F7F0E3]/95 backdrop-blur-md border-b border-[#382319]/10 shadow-[0_2px_18px_rgba(56,35,25,0.06)]'
       }`}
     >
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] sm:h-20 flex items-center justify-between gap-4 lg:gap-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] sm:h-20 flex items-center justify-between gap-3 lg:gap-4 xl:gap-8">
         {/* Brand Zone */}
         <Link
           to="/"
@@ -143,7 +143,7 @@ export function Header() {
               setMobileOpen(false);
             }
           }}
-          className="flex items-center gap-3 shrink-0 group focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C99536] rounded-sm"
+          className="flex items-center gap-2.5 xl:gap-3 shrink-0 group focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C99536] rounded-sm"
           aria-label="Butter Valley Ltd. Home"
         >
           <div className="h-14 w-[54px] sm:h-16 sm:w-[62px] rounded-md overflow-hidden bg-black p-1 ring-1 ring-[#C99536]/50 shrink-0">
@@ -159,7 +159,7 @@ export function Header() {
             />
           </div>
           <span
-            className={`font-serif text-xl sm:text-2xl font-semibold tracking-tight whitespace-nowrap shrink-0 transition-colors ${
+            className={`font-serif text-xl xl:text-2xl font-semibold tracking-tight whitespace-nowrap shrink-0 transition-colors ${
               isTransparent ? 'text-[#FFFCF6]' : 'text-[#382319]'
             }`}
           >
@@ -168,7 +168,7 @@ export function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav aria-label="Primary navigation" className="hidden lg:flex items-center gap-6 xl:gap-7">
+        <nav aria-label="Primary navigation" className="hidden lg:flex items-center lg:gap-3.5 xl:gap-6">
           <Link to="/" className={linkClass(pathname === '/')}>
             Home
           </Link>
@@ -242,6 +242,9 @@ export function Header() {
             )}
           </div>
 
+          <Link to="/our-team" className={linkClass(pathname === '/our-team')}>
+            Our Team
+          </Link>
           <Link to="/quality" className={linkClass(pathname === '/quality')}>
             Quality &amp; Certifications
           </Link>
@@ -258,7 +261,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => openQuoteModal()}
-            className="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-xs sm:text-sm font-medium whitespace-nowrap shrink-0 rounded-sm bg-[#C99536] text-[#FFFCF6] hover:bg-[#b5832b] transition-colors shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C99536]"
+            className="hidden sm:inline-flex items-center justify-center px-4 xl:px-5 py-2.5 text-xs xl:text-sm font-medium whitespace-nowrap shrink-0 rounded-sm bg-[#C99536] text-[#FFFCF6] hover:bg-[#b5832b] transition-colors shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C99536]"
           >
             Request a Quote
           </button>
@@ -357,6 +360,15 @@ export function Header() {
                 )}
               </div>
 
+              <Link
+                to="/our-team"
+                onClick={handleMobileNavClick}
+                className={`py-3 text-base font-medium border-b border-[#382319]/8 ${
+                  pathname === '/our-team' ? 'text-[#C99536]' : 'text-[#382319]'
+                }`}
+              >
+                Our Team
+              </Link>
               <Link
                 to="/quality"
                 onClick={handleMobileNavClick}

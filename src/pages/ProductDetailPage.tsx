@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, ChevronDown, Check, Globe2, ShieldCheck, Package } from 'lucide-react';
-import { Link } from '../context/RouterContext';
+import { Link, useRouter } from '../context/RouterContext';
 import { SeoHead } from '../components/SeoHead';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { MotionReveal } from '../components/MotionReveal';
@@ -10,22 +10,68 @@ import { CountryFlag } from '../components/CountryFlag';
 import { useQuoteModal } from '../context/QuoteModalContext';
 import { EXPORT_DESTINATIONS } from '../data/company';
 import { PRODUCT_CATEGORIES, type ProductCategory } from '../data/products';
+import { PINK_SALT_LAMPS_COLLECTION } from '../data/saltLamps';
 
 interface ProductDetailPageProps {
   category: ProductCategory;
 }
 
 export function ProductDetailPage({ category }: ProductDetailPageProps) {
+  const { search } = useRouter();
   const { openQuoteModal } = useQuoteModal();
   const [selectedSkuIdx, setSelectedSkuIdx] = useState(0);
+  const [selectedLampIdx, setSelectedLampIdx] = useState(0);
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
 
   useEffect(() => {
-    setSelectedSkuIdx(0);
+    const params = new URLSearchParams(search);
+    const productParam = params.get('product');
+    if (productParam) {
+      const normalized = productParam.toLowerCase();
+      const matchedIdx = category.skus.findIndex(
+        (sku) =>
+          sku.name.toLowerCase() === normalized ||
+          sku.name
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)/g, '') === normalized
+      );
+      setSelectedSkuIdx(matchedIdx >= 0 ? matchedIdx : 0);
+    } else {
+      setSelectedSkuIdx(0);
+    }
+    setSelectedLampIdx(0);
     setOpenFaqIdx(0);
-  }, [category.id]);
+  }, [category.id, category.skus, search]);
+
+  useEffect(() => {
+    if (category.id !== 'pink-himalayan-salt') return;
+
+    const params = new URLSearchParams(search);
+    const lampParam = params.get('lamp');
+    if (lampParam) {
+      const matchedIdx = PINK_SALT_LAMPS_COLLECTION.items.findIndex(
+        (item) => item.slug === lampParam || item.id === lampParam
+      );
+      if (matchedIdx >= 0) {
+        setSelectedLampIdx(matchedIdx);
+      }
+    }
+
+    if (window.location.hash === '#pink-salt-lamps' || lampParam) {
+      const timer = window.setTimeout(() => {
+        const el = document.getElementById('pink-salt-lamps');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 260);
+      return () => window.clearTimeout(timer);
+    }
+  }, [category.id, search]);
 
   const activeSku = category.skus[selectedSkuIdx] || category.skus[0];
+  const activeLamp =
+    PINK_SALT_LAMPS_COLLECTION.items[selectedLampIdx] || PINK_SALT_LAMPS_COLLECTION.items[0];
 
   const breadcrumbs = [
     { name: 'Home', path: '/' },
@@ -33,7 +79,11 @@ export function ProductDetailPage({ category }: ProductDetailPageProps) {
     { name: category.name, path: category.path },
   ];
 
-  const relatedCategories = PRODUCT_CATEGORIES.filter((c) => c.id !== category.id).slice(0, 3);
+  const currentIndex = PRODUCT_CATEGORIES.findIndex((c) => c.id === category.id);
+  const relatedCategories = Array.from({ length: 3 }, (_, offset) => {
+    const idx = (currentIndex + 1 + offset) % PRODUCT_CATEGORIES.length;
+    return PRODUCT_CATEGORIES[idx];
+  }).filter((c) => c.id !== category.id);
 
   return (
     <>
@@ -64,13 +114,14 @@ export function ProductDetailPage({ category }: ProductDetailPageProps) {
                   src={activeSku ? activeSku.image : category.heroImage}
                   alt={activeSku ? `${category.name} — ${activeSku.name}` : category.heroAlt}
                   fit={activeSku ? activeSku.imageFit : category.heroImageFit}
-                  aspectClass="aspect-[4/5]"
+                  aspectClass={category.id === 'shilajit' ? 'aspect-video' : 'aspect-square'}
+                  imgClassName="object-center"
                   priority
                 />
               </div>
 
               {activeSku && (
-                <div className="flex items-center justify-between text-xs sm:text-sm text-[#59351F] px-1">
+                <div className="flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm text-[#59351F] px-1">
                   <span className="font-medium text-[#382319]">{activeSku.name}</span>
                   {activeSku.note && <span>{activeSku.note}</span>}
                 </div>
@@ -81,7 +132,13 @@ export function ProductDetailPage({ category }: ProductDetailPageProps) {
                   <p className="text-xs font-medium text-[#78836A] uppercase tracking-wider mb-3">
                     Supplied Varieties ({category.skus.length})
                   </p>
-                  <div className="grid grid-cols-4 sm:grid-cols-5 lg:grid-cols-5 gap-2.5">
+                  <div
+                    className={
+                      category.id === 'shilajit'
+                        ? 'grid grid-cols-2 gap-3.5 max-w-lg'
+                        : 'grid grid-cols-4 sm:grid-cols-5 lg:grid-cols-5 gap-2.5'
+                    }
+                  >
                     {category.skus.map((sku, idx) => {
                       const isActive = idx === selectedSkuIdx;
                       return (
@@ -90,7 +147,8 @@ export function ProductDetailPage({ category }: ProductDetailPageProps) {
                           type="button"
                           onClick={() => setSelectedSkuIdx(idx)}
                           title={sku.name}
-                          className={`group text-left rounded-sm overflow-hidden border transition-all ${
+                          aria-pressed={isActive}
+                          className={`group text-left rounded-sm overflow-hidden border transition-all bg-[#FFFCF6] ${
                             isActive
                               ? 'border-[#C99536] ring-2 ring-[#C99536]/35'
                               : 'border-[#382319]/15 hover:border-[#382319]/45 opacity-85 hover:opacity-100'
@@ -100,8 +158,21 @@ export function ProductDetailPage({ category }: ProductDetailPageProps) {
                             src={sku.image}
                             alt={sku.name}
                             fit={sku.imageFit}
-                            aspectClass="aspect-[4/5]"
+                            compact
+                            aspectClass={category.id === 'shilajit' ? 'aspect-video' : 'aspect-square'}
+                            imgClassName="object-center"
                           />
+                          {category.id === 'shilajit' && (
+                            <div className="px-3 py-2 border-t border-[#382319]/10">
+                              <p
+                                className={`text-xs font-medium truncate ${
+                                  isActive ? 'text-[#382319]' : 'text-[#59351F]'
+                                }`}
+                              >
+                                {sku.name}
+                              </p>
+                            </div>
+                          )}
                         </button>
                       );
                     })}
@@ -116,12 +187,22 @@ export function ProductDetailPage({ category }: ProductDetailPageProps) {
                 <p className="text-xs sm:text-sm font-medium tracking-[0.14em] uppercase text-[#C99536]">
                   {category.kicker}
                 </p>
-                <h1 className="font-serif text-4xl sm:text-5xl font-semibold text-[#382319] leading-[1.08]">
+                <h1 className="font-serif text-[2.125rem] sm:text-5xl font-semibold text-[#382319] leading-[1.14] sm:leading-[1.1]">
                   {category.name}
                 </h1>
                 <p className="text-base sm:text-lg text-[#59351F] leading-relaxed">
                   {category.fullDescription}
                 </p>
+                {activeSku?.description && (
+                  <div className="bg-[#FFFCF6] border-l-2 border-[#C99536] px-4 py-3.5 rounded-r-sm space-y-1">
+                    <p className="text-xs font-medium uppercase tracking-wider text-[#C99536]">
+                      Selected Product · {activeSku.name}
+                    </p>
+                    <p className="text-sm text-[#382319] leading-relaxed">
+                      {activeSku.description}
+                    </p>
+                  </div>
+                )}
               </div>
 
               {/* Category Highlights / Uses */}
@@ -256,6 +337,154 @@ export function ProductDetailPage({ category }: ProductDetailPageProps) {
         </section>
       )}
 
+      {/* Separate Subcategory: Pink Salt Lamps (only on Pink Himalayan Salt page) */}
+      {category.id === 'pink-himalayan-salt' && (
+        <section
+          id="pink-salt-lamps"
+          className="scroll-mt-20 sm:scroll-mt-24 py-20 sm:py-24 bg-[#382319] text-[#FFFCF6] border-b border-[#C99536]/25"
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <MotionReveal className="max-w-3xl space-y-3.5">
+              <p className="text-xs sm:text-sm font-medium tracking-[0.16em] uppercase text-[#C99536]">
+                Subcategory · {PINK_SALT_LAMPS_COLLECTION.kicker}
+              </p>
+              <h2 className="font-serif text-3xl sm:text-5xl font-semibold text-[#FFFCF6]">
+                {PINK_SALT_LAMPS_COLLECTION.subcategoryName}
+              </h2>
+              <p className="text-base sm:text-lg text-[#F7F0E3]/85 leading-relaxed">
+                {PINK_SALT_LAMPS_COLLECTION.homeDescription}
+              </p>
+              <p className="text-xs sm:text-sm text-[#F7F0E3]/70">
+                {PINK_SALT_LAMPS_COLLECTION.categoryNote}
+              </p>
+            </MotionReveal>
+
+            {/* Interactive Lamp Detail View */}
+            <MotionReveal className="bg-[#241610] border border-[#C99536]/30 rounded-sm overflow-hidden">
+              <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
+                <div className="lg:col-span-6 border-b lg:border-b-0 lg:border-r border-[#C99536]/20">
+                  <ProductMediaFrame
+                    src={activeLamp.image}
+                    alt={activeLamp.alt}
+                    fit="cover"
+                    aspectClass="aspect-square"
+                    className="!bg-[#241610]"
+                    imgClassName="object-[50%_55%]"
+                  />
+                </div>
+
+                <div className="lg:col-span-6 p-6 sm:p-10 space-y-6">
+                  <div className="space-y-3">
+                    <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#C99536]">
+                      Selected Lamp Style · 0{selectedLampIdx + 1} of{' '}
+                      {PINK_SALT_LAMPS_COLLECTION.items.length}
+                    </p>
+                    <h3 className="font-serif text-2xl sm:text-4xl font-semibold text-[#FFFCF6]">
+                      {activeLamp.name}
+                    </h3>
+                    <p className="text-sm sm:text-base text-[#F7F0E3]/85 leading-relaxed">
+                      {activeLamp.description}
+                    </p>
+                  </div>
+
+                  <div className="bg-[#382319]/65 border border-[#C99536]/25 rounded-sm p-5 space-y-3">
+                    <p className="text-xs font-medium uppercase tracking-wider text-[#C99536]">
+                      Product &amp; Wholesale Inquiries
+                    </p>
+                    <p className="text-sm text-[#F7F0E3]/85 leading-relaxed">
+                      {PINK_SALT_LAMPS_COLLECTION.inquiryNotice}
+                    </p>
+                    <dl className="divide-y divide-[#F7F0E3]/10 text-xs sm:text-sm pt-1">
+                      <div className="py-2 flex flex-col sm:flex-row sm:justify-between gap-1">
+                        <dt className="text-[#F7F0E3]/65">Material</dt>
+                        <dd className="font-medium text-[#FFFCF6] sm:text-right">
+                          Natural Himalayan Pink Salt
+                        </dd>
+                      </div>
+                      <div className="py-2 flex flex-col sm:flex-row sm:justify-between gap-1">
+                        <dt className="text-[#F7F0E3]/65">Sizes, Weights &amp; Fittings</dt>
+                        <dd className="font-medium text-[#FFFCF6] sm:text-right">
+                          Available on Request
+                        </dd>
+                      </div>
+                      <div className="pt-2 flex flex-col sm:flex-row sm:justify-between gap-1">
+                        <dt className="text-[#F7F0E3]/65">Pricing &amp; Packing</dt>
+                        <dd className="font-medium text-[#FFFCF6] sm:text-right">
+                          Available on Request
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-3 pt-1">
+                    <button
+                      type="button"
+                      onClick={() => openQuoteModal()}
+                      className="min-h-[48px] inline-flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-medium rounded-sm bg-[#C99536] text-[#FFFCF6] hover:bg-[#b5832b] transition-colors shadow-sm"
+                    >
+                      Request a Quote
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </MotionReveal>
+
+            {/* All 4 Lamp Product Cards */}
+            <div className="space-y-4">
+              <p className="text-xs font-medium tracking-[0.14em] uppercase text-[#C99536]">
+                Select a Pink Salt Lamp to Preview Details
+              </p>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5">
+                {PINK_SALT_LAMPS_COLLECTION.items.map((lamp, idx) => {
+                  const isSelected = idx === selectedLampIdx;
+                  return (
+                    <button
+                      key={lamp.id}
+                      type="button"
+                      onClick={() => {
+                        setSelectedLampIdx(idx);
+                        if (window.innerWidth < 1024) {
+                          document
+                            .getElementById('pink-salt-lamps')
+                            ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                      }}
+                      aria-pressed={isSelected}
+                      className={`group text-left bg-[#241610] rounded-sm overflow-hidden border transition-all duration-300 flex flex-col ${
+                        isSelected
+                          ? 'border-[#C99536] ring-2 ring-[#C99536]/40 shadow-[0_14px_32px_rgba(0,0,0,0.35)]'
+                          : 'border-[#C99536]/20 hover:border-[#C99536]/65 opacity-90 hover:opacity-100'
+                      }`}
+                    >
+                      <ProductMediaFrame
+                        src={lamp.image}
+                        alt={lamp.alt}
+                        fit="cover"
+                        aspectClass="aspect-square"
+                        imgClassName="object-center group-hover:scale-[1.04]"
+                      />
+                      <div className="p-3.5 sm:p-4 space-y-1 border-t border-[#C99536]/15 flex-1">
+                        <h4
+                          className={`font-serif text-base sm:text-xl font-semibold leading-snug transition-colors ${
+                            isSelected
+                              ? 'text-[#C99536]'
+                              : 'text-[#FFFCF6] group-hover:text-[#C99536]'
+                          }`}
+                        >
+                          {lamp.name}
+                        </h4>
+                        <p className="text-xs text-[#F7F0E3]/70 leading-snug">{lamp.shortNote}</p>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Full Range Gallery when category has multiple SKUs */}
       {category.skus.length > 1 && (
         <section className="py-20 bg-[#FFFCF6] border-b border-[#382319]/10">
@@ -269,7 +498,13 @@ export function ProductDetailPage({ category }: ProductDetailPageProps) {
               </h2>
             </MotionReveal>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-6">
+            <div
+              className={
+                category.id === 'shilajit'
+                  ? 'grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8'
+                  : 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 lg:gap-6'
+              }
+            >
               {category.skus.map((sku, idx) => (
                 <MotionReveal
                   key={sku.name}
@@ -288,26 +523,69 @@ export function ProductDetailPage({ category }: ProductDetailPageProps) {
                       src={sku.image}
                       alt={sku.name}
                       fit={sku.imageFit}
-                      aspectClass="aspect-[4/5]"
-                      imgClassName="group-hover:scale-[1.03]"
+                      aspectClass={category.id === 'shilajit' ? 'aspect-video' : 'aspect-square'}
+                      imgClassName="object-center group-hover:scale-[1.03]"
                     />
-                    <div className="p-4 space-y-1">
-                      <h3 className="font-serif text-lg sm:text-xl font-semibold text-[#382319] group-hover:text-[#C99536] transition-colors">
+                    <div className={category.id === 'shilajit' ? 'p-6 space-y-2' : 'p-4 space-y-1'}>
+                      {category.id === 'shilajit' && sku.note && (
+                        <p className="text-xs font-medium uppercase tracking-wider text-[#C99536]">
+                          {sku.note}
+                        </p>
+                      )}
+                      <h3
+                        className={`font-serif font-semibold text-[#382319] group-hover:text-[#C99536] transition-colors ${
+                          category.id === 'shilajit'
+                            ? 'text-2xl sm:text-3xl'
+                            : 'text-lg sm:text-xl'
+                        }`}
+                      >
                         {sku.name}
                       </h3>
-                      {sku.note && <p className="text-xs text-[#59351F]">{sku.note}</p>}
+                      {category.id === 'shilajit' ? (
+                        sku.description && (
+                          <p className="text-sm sm:text-base text-[#59351F] leading-relaxed pt-1">
+                            {sku.description}
+                          </p>
+                        )
+                      ) : (
+                        sku.note && <p className="text-xs text-[#59351F]">{sku.note}</p>
+                      )}
                     </div>
                   </button>
-                  <div className="px-4 pb-4 pt-1">
-                    <button
-                      type="button"
-                      onClick={() => openQuoteModal(sku.name)}
-                      className="w-full min-h-[38px] inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-medium rounded-sm border border-[#C99536]/60 text-[#382319] bg-[#FFFCF6] hover:bg-[#C99536] hover:text-[#FFFCF6] transition-colors"
-                    >
-                      Request a Quote
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
+                  {category.id === 'shilajit' ? (
+                    <div className="px-6 pb-6 pt-2 flex flex-col sm:flex-row gap-3">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSelectedSkuIdx(idx);
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        className="flex-1 min-h-[44px] inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs sm:text-sm font-medium rounded-sm bg-[#382319] text-[#FFFCF6] hover:bg-[#59351F] transition-colors"
+                      >
+                        View Details
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => openQuoteModal(sku.name)}
+                        className="flex-1 min-h-[44px] inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs sm:text-sm font-medium rounded-sm border border-[#C99536]/80 text-[#382319] bg-[#FFFCF6] hover:bg-[#C99536] hover:text-[#FFFCF6] transition-colors"
+                      >
+                        Request a Quote
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="px-4 pb-4 pt-1">
+                      <button
+                        type="button"
+                        onClick={() => openQuoteModal(sku.name)}
+                        className="w-full min-h-[38px] inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-medium rounded-sm border border-[#C99536]/60 text-[#382319] bg-[#FFFCF6] hover:bg-[#C99536] hover:text-[#FFFCF6] transition-colors"
+                      >
+                        Request a Quote
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  )}
                 </MotionReveal>
               ))}
             </div>
@@ -472,26 +750,29 @@ export function ProductDetailPage({ category }: ProductDetailPageProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {relatedCategories.map((rel) => (
-              <Link
+              <div
                 key={rel.id}
-                to={rel.path}
-                className="group bg-[#FFFCF6] border border-[#382319]/10 rounded-sm overflow-hidden flex flex-col hover:shadow-md transition-shadow"
+                className="group bg-[#FFFCF6] border border-[#382319]/10 rounded-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition-shadow"
               >
-                <ProductMediaFrame
-                  src={rel.heroImage}
-                  alt={rel.heroAlt}
-                  fit={rel.heroImageFit}
-                  aspectClass="aspect-[4/3]"
-                  imgClassName="group-hover:scale-[1.03]"
-                />
-                <div className="p-6 space-y-2">
-                  <p className="text-xs font-medium text-[#78836A]">{rel.kicker}</p>
-                  <h3 className="font-serif text-2xl font-semibold text-[#382319] group-hover:text-[#C99536] transition-colors">
-                    {rel.name}
-                  </h3>
-                  <p className="text-sm text-[#59351F] leading-relaxed">{rel.shortDescription}</p>
+                <div>
+                  <Link to={rel.path} className="block overflow-hidden">
+                    <ProductMediaFrame
+                      src={rel.heroImage}
+                      alt={rel.heroAlt}
+                      fit="contain"
+                      aspectClass="aspect-square"
+                      imgClassName="object-center group-hover:scale-[1.03]"
+                    />
+                  </Link>
+                  <div className="p-6 space-y-2">
+                    <p className="text-xs font-medium text-[#78836A]">{rel.kicker}</p>
+                    <h3 className="font-serif text-2xl font-semibold text-[#382319] group-hover:text-[#C99536] transition-colors">
+                      <Link to={rel.path}>{rel.name}</Link>
+                    </h3>
+                    <p className="text-sm text-[#59351F] leading-relaxed">{rel.shortDescription}</p>
+                  </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>

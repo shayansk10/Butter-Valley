@@ -116,7 +116,7 @@ export function TermsConditionsPage() {
             <p className="text-xs sm:text-sm font-medium tracking-[0.14em] uppercase text-[#C99536]">
               Legal Information
             </p>
-            <h1 className="font-serif text-4xl sm:text-6xl font-semibold text-[#382319] leading-[1.08]">
+            <h1 className="font-serif text-[2.125rem] sm:text-5xl lg:text-[3.5rem] font-semibold text-[#382319] leading-[1.14] sm:leading-[1.1]">
               Terms &amp; Conditions
             </h1>
             <p className="text-base sm:text-xl text-[#59351F] leading-relaxed max-w-3xl">

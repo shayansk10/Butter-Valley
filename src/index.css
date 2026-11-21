@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
   --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --color-chocolate: #382319;
   --color-deep-brown: #59351F;
@@ -15,19 +15,58 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     background-color: #FFFCF6;
     color: #28231F;
     overflow-x: clip;
   }
 
   body {
+    font-family: var(--font-sans);
     overflow-x: clip;
   }
 
-  h1, h2, h3, h4, .font-display {
-    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  button,
+  input,
+  select,
+  textarea {
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-display,
+  .font-serif {
+    font-family: var(--font-serif);
+    font-optical-sizing: auto;
+    font-kerning: normal;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-display {
     text-wrap: balance;
+  }
+
+  h1 {
+    letter-spacing: -0.015em;
+  }
+
+  h2 {
+    letter-spacing: -0.01em;
+  }
+
+  h3,
+  h4 {
+    letter-spacing: -0.005em;
   }
 }
 

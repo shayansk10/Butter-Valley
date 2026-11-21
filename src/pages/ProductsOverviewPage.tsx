@@ -26,8 +26,8 @@ export function ProductsOverviewPage() {
   return (
     <>
       <SeoHead
-        title="Our Products | Wholesale Food & Pink Himalayan Salt Catalogue | Butter Valley Ltd."
-        description="Explore Butter Valley's six export categories: Nut Butters & Spreads, Recipe Mixes, Pure Spices, Pink Himalayan Salt, Desserts & Pantry Staples, and Organic Shilajit & Pure Saffron."
+        title="Our Products | Wholesale Food, Pink Salt & Forage Catalogue | Butter Valley Ltd."
+        description="Explore Butter Valley's eight export categories: Artisanal Nut Butters & Spreads, Recipe Mixes, Pure Spices, Pink Himalayan Salt & Minerals, Desserts & Pantry Staples, Shilajit, Zafran (Saffron), and Rhodes Grass."
         path="/products"
         breadcrumbs={breadcrumbs}
       />
@@ -41,11 +41,11 @@ export function ProductsOverviewPage() {
               <p className="text-xs sm:text-sm font-medium tracking-[0.14em] uppercase text-[#C99536]">
                 Wholesale &amp; Export Catalogue
               </p>
-              <h1 className="font-serif text-4xl sm:text-6xl font-semibold text-[#382319] leading-[1.08]">
+              <h1 className="font-serif text-[2.125rem] sm:text-5xl lg:text-[3.5rem] font-semibold text-[#382319] leading-[1.14] sm:leading-[1.1]">
                 Our Products
               </h1>
               <p className="text-base sm:text-lg text-[#59351F] leading-relaxed">
-                Six core product divisions manufactured in SITE Hyderabad and sourced from Khewra,
+                Eight core product divisions manufactured in SITE Hyderabad and sourced across
                 Pakistan for international wholesale buyers, distributors and retail shelves.
               </p>
             </div>
@@ -102,18 +102,18 @@ export function ProductsOverviewPage() {
               <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
                 <Link
                   to={category.path}
-                  className="lg:col-span-5 block overflow-hidden group"
+                  className="lg:col-span-5 bg-[#F7F0E3] flex items-center justify-center overflow-hidden group border-b lg:border-b-0 lg:border-r border-[#382319]/10"
                 >
                   <ProductMediaFrame
                     src={category.heroImage}
                     alt={category.heroAlt}
-                    fit={category.heroImageFit}
-                    aspectClass="aspect-[4/5] lg:h-full lg:aspect-auto min-h-[320px]"
-                    imgClassName="group-hover:scale-[1.03]"
+                    fit="contain"
+                    aspectClass="aspect-square w-full"
+                    imgClassName="object-center group-hover:scale-[1.03]"
                   />
                 </Link>
 
-                <div className="lg:col-span-7 p-7 sm:p-10 lg:p-12 flex flex-col justify-between space-y-8">
+                <div className="lg:col-span-7 p-7 sm:p-10 flex flex-col justify-between space-y-8">
                   <div className="space-y-4">
                     <p className="text-xs font-medium text-[#78836A]">
                       Category 0{PRODUCT_CATEGORIES.findIndex((c) => c.id === category.id) + 1} ·{' '}

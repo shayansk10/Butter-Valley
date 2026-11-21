@@ -7,7 +7,13 @@ dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const PORT = Number(process.env.PORT) || 3000;
+const portFlagIndex = process.argv.indexOf('--port');
+const cliPort =
+  portFlagIndex !== -1 && process.argv[portFlagIndex + 1]
+    ? Number(process.argv[portFlagIndex + 1])
+    : undefined;
+
+const PORT = cliPort || Number(process.env.PORT) || 3000;
 const isProduction = process.env.NODE_ENV === 'production';
 
 async function startServer() {
@@ -19,12 +25,22 @@ async function startServer() {
   });
 
   if (!isProduction) {
-    const { createServer: createViteServer } = await import('vite');
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: 'spa',
+    const viteReady = (async () => {
+      const { createServer: createViteServer } = await import('vite');
+      return createViteServer({
+        server: { middlewareMode: true },
+        appType: 'spa',
+      });
+    })();
+
+    app.use(async (req, res, next) => {
+      try {
+        const vite = await viteReady;
+        vite.middlewares(req, res, next);
+      } catch (err) {
+        next(err);
+      }
     });
-    app.use(vite.middlewares);
   } else {
     const distPath = path.join(__dirname, 'dist');
     app.use(express.static(distPath, { index: false }));
@@ -38,4 +54,7 @@ async function startServer() {
   });
 }
 
-startServer();
+startServer().catch((err) => {
+  console.error('Failed to start Butter Valley server:', err);
+  process.exit(1);
+});
