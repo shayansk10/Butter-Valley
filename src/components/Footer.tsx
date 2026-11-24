@@ -3,6 +3,7 @@ import { Link } from '../context/RouterContext';
 import { useQuoteModal } from '../context/QuoteModalContext';
 import { COMPANY } from '../data/company';
 import { PRODUCT_CATEGORIES } from '../data/products';
+import { ResponsiveImage } from './ResponsiveImage';
 
 export function Footer() {
   const { openQuoteModal } = useQuoteModal();
@@ -16,14 +17,13 @@ export function Footer() {
           <div className="lg:col-span-4 space-y-5">
             <Link to="/" className="inline-flex items-center gap-3.5 group">
               <div className="h-20 w-[77px] rounded-md overflow-hidden bg-black p-1 ring-1 ring-[#C99536]/60 shrink-0">
-                <img
+                <ResponsiveImage
                   src={COMPANY.logo}
                   alt="Butter Valley Co. Spread The Love logo"
                   width={400}
                   height={415}
-                  decoding="sync"
+                  sizes="80px"
                   className="w-full h-full object-contain"
-                  referrerPolicy="no-referrer"
                 />
               </div>
               <div>

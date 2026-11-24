@@ -3,6 +3,7 @@ import { Link } from '../context/RouterContext';
 import { SeoHead } from '../components/SeoHead';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { MotionReveal } from '../components/MotionReveal';
+import { COMPANY } from '../data/company';
 
 const TERMS_SECTIONS = [
   {
@@ -189,10 +190,10 @@ export function TermsConditionsPage() {
                     </dt>
                     <dd>
                       <a
-                        href="mailto:buttervalley30@gmail.com"
+                        href={`mailto:${COMPANY.email}`}
                         className="text-[#382319] font-medium hover:text-[#C99536] underline underline-offset-4 transition-colors break-all"
                       >
-                        buttervalley30@gmail.com
+                        {COMPANY.email}
                       </a>
                     </dd>
                   </div>

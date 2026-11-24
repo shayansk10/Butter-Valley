@@ -110,6 +110,8 @@ export function ProductsOverviewPage() {
                     fit="contain"
                     aspectClass="aspect-square w-full"
                     imgClassName="object-center group-hover:scale-[1.03]"
+                    priority={idx === 0}
+                    sizes="(max-width: 1023px) 100vw, 42vw"
                   />
                 </Link>
 

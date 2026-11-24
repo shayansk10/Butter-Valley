@@ -5,6 +5,7 @@ import { useQuoteModal } from '../context/QuoteModalContext';
 import { acquireScrollLock } from '../utils/scrollLock';
 import { COMPANY } from '../data/company';
 import { PRODUCT_CATEGORIES } from '../data/products';
+import { ResponsiveImage } from './ResponsiveImage';
 
 export function Header() {
   const { pathname } = useRouter();
@@ -147,15 +148,14 @@ export function Header() {
           aria-label="Butter Valley Ltd. Home"
         >
           <div className="h-14 w-[54px] sm:h-16 sm:w-[62px] rounded-md overflow-hidden bg-black p-1 ring-1 ring-[#C99536]/50 shrink-0">
-            <img
+            <ResponsiveImage
               src={COMPANY.logo}
               alt="Butter Valley Co. Spread The Love logo"
               width={400}
               height={415}
-              loading="eager"
-              decoding="sync"
+              sizes="64px"
+              priority
               className="w-full h-full object-contain"
-              referrerPolicy="no-referrer"
             />
           </div>
           <span

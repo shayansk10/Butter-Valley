@@ -5,6 +5,7 @@ import { SeoHead } from '../components/SeoHead';
 import { MotionReveal } from '../components/MotionReveal';
 import { ProductMediaFrame } from '../components/ProductMediaFrame';
 import { GlobalReachDestinations } from '../components/GlobalReachDestinations';
+import { ResponsiveImage } from '../components/ResponsiveImage';
 import { useQuoteModal } from '../context/QuoteModalContext';
 import { COMPANY, QUALITY_CREDENTIALS } from '../data/company';
 import { PRODUCT_CATEGORIES } from '../data/products';
@@ -35,14 +36,13 @@ export function HomePage() {
         {/* Mobile & Tablet (< lg): natural-aspect centered scene feathered softly into #1B100A so portrait screens avoid extreme zoom */}
         <div className="lg:hidden absolute inset-0 flex items-center justify-center overflow-hidden">
           <div className="relative w-[125%] max-w-none sm:w-full aspect-[1835/857] shrink-0">
-            <img
+            <ResponsiveImage
               src={COMPANY.homeHeroImage}
               alt=""
               width={1835}
               height={857}
-              fetchPriority="high"
-              decoding="sync"
-              referrerPolicy="no-referrer"
+              sizes="100vw"
+              priority
               className="w-full h-full object-cover object-center"
             />
             <div className="absolute inset-x-0 top-0 h-14 sm:h-20 bg-gradient-to-b from-[#1B100A] via-[#1B100A]/65 to-transparent" />
@@ -51,15 +51,15 @@ export function HomePage() {
         </div>
 
         {/* Desktop (lg+): preserved full-bleed fixed cover canvas */}
-        <img
+        <ResponsiveImage
           src={COMPANY.homeHeroImage}
           alt=""
           width={1835}
           height={857}
-          fetchPriority="high"
-          decoding="sync"
-          referrerPolicy="no-referrer"
-          className="hidden lg:block w-full h-full object-cover object-center"
+          sizes="100vw"
+          priority
+          pictureClassName="hidden lg:block w-full h-full"
+          className="w-full h-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-[#1B100A]/36 lg:bg-[#1B100A]/28" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_25%,rgba(20,11,7,0.58)_100%)]" />
@@ -70,14 +70,13 @@ export function HomePage() {
         {/* Mobile & Tablet crisp visual band below transparent header so the full still-life scene displays without cropping */}
         <div className="pt-[72px] sm:pt-20 lg:hidden">
           <div className="relative w-full aspect-[1835/857] bg-[#1B100A]">
-            <img
+            <ResponsiveImage
               src={COMPANY.homeHeroImage}
               alt="Golden saffron bottle, brass mortar and pestle, vanilla pods and Pink Himalayan Salt crystals"
               width={1835}
               height={857}
-              fetchPriority="high"
-              decoding="sync"
-              referrerPolicy="no-referrer"
+              sizes="100vw"
+              priority
               className="block w-full h-full object-contain object-center"
             />
             <div
@@ -214,6 +213,7 @@ export function HomePage() {
                       fit="cover"
                       aspectClass="aspect-[10/13]"
                       imgClassName="object-center hover:scale-[1.03]"
+                      sizes="(max-width: 1023px) 58vw, 28vw"
                     />
                   </div>
                   <div className="col-span-5">
@@ -227,6 +227,7 @@ export function HomePage() {
                         fit="cover"
                         aspectClass="aspect-[2/3]"
                         imgClassName="object-center group-hover:scale-[1.03]"
+                        sizes="(max-width: 1023px) 42vw, 20vw"
                       />
                     </Link>
                   </div>
@@ -309,6 +310,7 @@ export function HomePage() {
                                 : 'aspect-square'
                             }
                             imgClassName="object-center group-hover:scale-[1.03]"
+                            sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
                           />
                         </Link>
 
@@ -436,6 +438,7 @@ export function HomePage() {
                     fit="cover"
                     aspectClass="aspect-square"
                     imgClassName="object-center"
+                    sizes="(max-width: 1023px) 100vw, 42vw"
                   />
                 </div>
               </MotionReveal>
@@ -577,6 +580,7 @@ export function HomePage() {
                         fit="cover"
                         aspectClass="aspect-square"
                         imgClassName="object-center group-hover:scale-[1.04]"
+                        sizes="(max-width: 1023px) 46vw, 24vw"
                       />
                       <div className="p-3.5 sm:p-4 border-t border-[#C99536]/18 space-y-1">
                         <h3 className="font-serif text-base sm:text-xl font-semibold text-[#FFFCF6] group-hover:text-[#C99536] transition-colors leading-snug">
@@ -657,12 +661,10 @@ export function HomePage() {
                       className="group block bg-[#2B1B13] border border-[#C99536]/28 hover:border-[#C99536]/75 rounded-sm overflow-hidden transition-all duration-300 hover:shadow-[0_14px_32px_rgba(0,0,0,0.45)]"
                     >
                       <div className="aspect-square overflow-hidden bg-[#241610]">
-                        <img
+                        <ResponsiveImage
                           src={photo.src}
                           alt={photo.alt}
-                          loading="lazy"
-                          decoding="async"
-                          referrerPolicy="no-referrer"
+                          sizes="(max-width: 639px) 46vw, 15vw"
                           className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                         />
                       </div>

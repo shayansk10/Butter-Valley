@@ -5,6 +5,7 @@ import { Breadcrumbs } from '../components/Breadcrumbs';
 import { MotionReveal } from '../components/MotionReveal';
 import { ProductMediaFrame } from '../components/ProductMediaFrame';
 import { CtaBand } from '../components/CtaBand';
+import { ResponsiveImage } from '../components/ResponsiveImage';
 import { COMPANY, WHY_CHOOSE_BUTTER_VALLEY } from '../data/company';
 import { PRODUCT_CATEGORIES } from '../data/products';
 
@@ -42,8 +43,8 @@ export function AboutPage() {
   return (
     <>
       <SeoHead
-        title="About Us | R&J Butter Valley (Butter Valley Ltd.) — Pakistani Manufacturer & Exporter"
-        description="Learn about R&J Butter Valley (Butter Valley Ltd.), a Pakistani exporter of Pink Himalayan Salt from the Khewra Salt Mine alongside artisanal nut spreads, spices, recipe mixes, desserts and organic wellness products."
+        title="About Us | Butter Valley — Pakistani Manufacturer & Exporter"
+        description="Learn about Butter Valley, a Pakistani exporter of Pink Himalayan Salt from the Khewra Salt Mine alongside artisanal nut spreads, spices, recipe mixes, desserts and organic wellness products."
         path="/about"
         breadcrumbs={breadcrumbs}
       />
@@ -60,9 +61,9 @@ export function AboutPage() {
               Crafted in Pakistan for International Tables
             </h1>
             <p className="text-base sm:text-xl text-[#59351F] leading-relaxed">
-              {COMPANY.legalName} ({COMPANY.name}) is a Pakistani exporter of Pink Himalayan Salt
-              sourced from the Khewra Salt Mine, alongside artisanal nut spreads, spices, recipe
-              mixes, desserts and organic wellness products.
+              {COMPANY.legalName} is a Pakistani exporter of Pink Himalayan Salt sourced from the
+              Khewra Salt Mine, alongside artisanal nut spreads, spices, recipe mixes, desserts and
+              organic wellness products.
             </p>
           </div>
         </div>
@@ -80,19 +81,19 @@ export function AboutPage() {
                   fit="cover"
                   aspectClass="aspect-[1835/857]"
                   imgClassName="object-center"
+                  sizes="(max-width: 1023px) 100vw, 48vw"
                   priority
                 />
               </div>
               <div className="p-6 bg-[#F7F0E3] border border-[#382319]/10 rounded-sm flex items-center gap-5">
                 <div className="h-24 w-[92px] rounded-md overflow-hidden bg-black p-1.5 ring-1 ring-[#C99536]/60 shrink-0">
-                  <img
+                  <ResponsiveImage
                     src={COMPANY.logo}
                     alt="Butter Valley Co. official seal"
                     width={400}
                     height={415}
-                    decoding="sync"
+                    sizes="96px"
                     className="w-full h-full object-contain"
-                    referrerPolicy="no-referrer"
                   />
                 </div>
                 <div className="min-w-0">

@@ -9,6 +9,7 @@ import { CtaBand } from '../components/CtaBand';
 import { GlobalReachDestinations } from '../components/GlobalReachDestinations';
 import { CountryFlag } from '../components/CountryFlag';
 import { StockOperationsGallery } from '../components/StockOperationsGallery';
+import { ResponsiveImage } from '../components/ResponsiveImage';
 import { useQuoteModal } from '../context/QuoteModalContext';
 import { EXPORT_DESTINATIONS, QUALITY_CREDENTIALS } from '../data/company';
 import { PRODUCT_CATEGORIES } from '../data/products';
@@ -81,7 +82,7 @@ export function ExportPage() {
               </h2>
               <p className="text-base text-[#59351F] leading-relaxed">
                 With direct origin sourcing from the Khewra Salt Mine and manufacturing at SITE
-                Hyderabad, R&amp;J Butter Valley brings practical product export experience across
+                Hyderabad, Butter Valley brings practical product export experience across
                 international retail and bulk wholesale channels.
               </p>
               <ul className="space-y-2.5 pt-2 text-sm text-[#382319]">
@@ -394,14 +395,13 @@ export function ExportPage() {
 
             <MotionReveal delay={0.08} className="lg:col-span-6">
               <div className="max-w-lg mx-auto lg:max-w-none bg-[#F7F0E3] border border-[#382319]/15 rounded-sm p-3 sm:p-4 shadow-[0_20px_48px_rgba(56,35,25,0.12)]">
-                <img
+                <ResponsiveImage
                   src="/assets/aistudio/Sea_Freight_Container_Availability_Poster_2310a7fa.png"
                   alt="Sea Freight System poster showing 20/40 ft containers available in Karachi and Lahore for Malaysia, Indonesia, Vietnam, Korea, Thailand, Sri Lanka, Japan, Saudi Arabia, China, Singapore, and Bangladesh"
                   width={1187}
                   height={1326}
-                  loading="lazy"
-                  decoding="async"
-                  referrerPolicy="no-referrer"
+                  sizes="(max-width: 1023px) 94vw, 48vw"
+                  pictureClassName="block w-full"
                   className="w-full h-auto block rounded-sm"
                 />
               </div>

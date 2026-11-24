@@ -43,8 +43,24 @@ async function startServer() {
     });
   } else {
     const distPath = path.join(__dirname, 'dist');
-    app.use(express.static(distPath, { index: false }));
+    const mime = (express.static as unknown as { mime?: { define?: (types: Record<string, string[]>) => void } }).mime;
+    mime?.define?.({ 'image/avif': ['avif'] });
+    app.use(
+      express.static(distPath, {
+        index: false,
+        setHeaders: (res, filePath) => {
+          if (filePath.includes(`${path.sep}assets${path.sep}`)) {
+            res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+          } else if (filePath.endsWith('.html')) {
+            res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+          } else {
+            res.setHeader('Cache-Control', 'public, max-age=604800');
+          }
+        },
+      })
+    );
     app.get('*', (_req, res) => {
+      res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
       res.sendFile(path.join(distPath, 'index.html'));
     });
   }

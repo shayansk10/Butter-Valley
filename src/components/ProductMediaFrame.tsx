@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Package } from 'lucide-react';
+import { ResponsiveImage } from './ResponsiveImage';
 
 interface ProductMediaFrameProps {
   src: string;
@@ -10,6 +11,7 @@ interface ProductMediaFrameProps {
   imgClassName?: string;
   priority?: boolean;
   compact?: boolean;
+  sizes?: string;
 }
 
 export function ProductMediaFrame({
@@ -21,8 +23,13 @@ export function ProductMediaFrame({
   imgClassName = '',
   priority = false,
   compact = false,
+  sizes = '(max-width: 767px) 100vw, 50vw',
 }: ProductMediaFrameProps) {
   const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setHasError(false);
+  }, [src]);
 
   return (
     <div
@@ -31,12 +38,11 @@ export function ProductMediaFrame({
       } ${aspectClass} ${className}`}
     >
       {!hasError ? (
-        <img
+        <ResponsiveImage
           src={src}
           alt={alt}
-          loading={priority ? 'eager' : 'lazy'}
-          decoding={priority ? 'sync' : 'async'}
-          referrerPolicy="no-referrer"
+          sizes={sizes}
+          priority={priority}
           onError={() => setHasError(true)}
           className={`w-full h-full transition-transform duration-700 ease-out ${
             fit === 'contain'

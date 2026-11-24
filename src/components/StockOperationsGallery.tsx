@@ -3,6 +3,7 @@ import { Expand, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { MotionReveal } from './MotionReveal';
 import { EXPORT_OPERATIONS_CONTENT, type OperationsPhoto } from '../data/operationsGallery';
 import { acquireScrollLock } from '../utils/scrollLock';
+import { ResponsiveImage } from './ResponsiveImage';
 
 export function StockOperationsGallery() {
   const photos = EXPORT_OPERATIONS_CONTENT.photos;
@@ -54,12 +55,10 @@ export function StockOperationsGallery() {
           className="group w-full h-full text-left bg-[#FFFCF6] border border-[#382319]/12 hover:border-[#C99536]/65 rounded-sm overflow-hidden flex flex-col transition-all duration-300 hover:shadow-[0_18px_40px_rgba(56,35,25,0.1)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C99536]"
         >
           <div className={`relative w-full overflow-hidden bg-[#EFE6D5] ${aspectClass}`}>
-            <img
+            <ResponsiveImage
               src={photo.src}
               alt={photo.alt}
-              loading="lazy"
-              decoding="async"
-              referrerPolicy="no-referrer"
+              sizes="(max-width: 767px) 100vw, 48vw"
               className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
             />
             <span
@@ -139,10 +138,12 @@ export function StockOperationsGallery() {
             </button>
 
             <div className="relative flex-1 h-full flex items-center justify-center min-w-0">
-              <img
+              <ResponsiveImage
                 src={activePhoto.src}
                 alt={activePhoto.alt}
-                referrerPolicy="no-referrer"
+                priority
+                sizes="(max-width: 1023px) 92vw, 80vw"
+                pictureClassName="contents"
                 className="max-h-[72dvh] max-w-full w-auto h-auto object-contain rounded-sm border border-[#C99536]/30 shadow-[0_24px_60px_rgba(0,0,0,0.5)]"
               />
             </div>

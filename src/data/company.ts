@@ -1,12 +1,12 @@
 export const COMPANY = {
   name: 'Butter Valley Ltd.',
-  legalName: 'R&J Butter Valley',
+  legalName: 'Butter Valley',
   shortName: 'Butter Valley',
   tagline: 'Spread The Love',
   mission:
     'To become a globally trusted and reliable supplier of Pink Himalayan Salt, recognized for quality, sustainability, reliability and customer satisfaction.',
   website: 'https://buttervalley.org',
-  email: 'buttervalley30@gmail.com',
+  email: 'info.buttervalley@gmail.com',
   address:
     'Plot No. A-23, Besides MCB SITE Branch, Opposite Rangers Headquarters, Main Auto Bhan Road, Near Fateh Chowk, SITE Hyderabad, Sindh, Pakistan.',
   cityRegion: 'Hyderabad, Sindh, Pakistan',
@@ -240,8 +240,8 @@ export const LEADERSHIP_TEAM: readonly TeamMember[] = [
     name: 'Jahanzaib Ul Hassan Shaikh',
     initials: 'JS',
     designation: 'Co-founder & Director',
-    phone: '+92 333 2629716',
-    phoneHref: 'tel:+923332629716',
+    phone: '+92 315 3029801',
+    phoneHref: 'tel:+923153029801',
     email: 'jahanzaibulhassanshaikh@gmail.com',
   },
   {

@@ -21,9 +21,12 @@ interface RequestQuoteFormProps {
   variant?: 'modal' | 'embedded';
 }
 
-const EMAILJS_SERVICE_ID = 'service_umcsipq';
-const EMAILJS_TEMPLATE_ID = 'template_0g372jb';
-const EMAILJS_PUBLIC_KEY = 'ldRWtZJsKwArbV6i-';
+const EMAILJS_SERVICE_ID =
+  import.meta.env.VITE_EMAILJS_SERVICE_ID?.trim() || 'service_an6rjvr';
+const EMAILJS_TEMPLATE_ID =
+  import.meta.env.VITE_EMAILJS_TEMPLATE_ID?.trim() || 'template_w77c3v5';
+const EMAILJS_PUBLIC_KEY =
+  import.meta.env.VITE_EMAILJS_PUBLIC_KEY?.trim() || 'jQpPIwSQkFtUMkp9n';
 
 let emailJsInitialized = false;
 
@@ -35,9 +38,8 @@ function ensureEmailJsInitialized() {
 }
 
 /**
- * Reusable quotation submission handler using EmailJS.
- * Sends a single request to the main Contact Us template; EmailJS handles
- * the linked customer Auto-Reply template automatically on the dashboard.
+ * Reusable quotation and contact submission handler using EmailJS.
+ * Sends a single request with the configured Service ID and Template ID.
  */
 export async function handleQuoteSubmission(
   values: QuoteFormValues
@@ -54,7 +56,9 @@ export async function handleQuoteSubmission(
     message: values.message,
   };
 
-  await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+  await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, {
+    publicKey: EMAILJS_PUBLIC_KEY,
+  });
 
   return {
     status: 'sent',
@@ -513,7 +517,17 @@ export function RequestQuoteForm({
           className="bg-[#FFFCF6] border border-[#8B2E2E]/45 rounded-sm p-4 flex items-start gap-3 text-sm text-[#8B2E2E]"
         >
           <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-          <p className="leading-relaxed">{submitError}</p>
+          <p className="leading-relaxed">
+            We couldn&apos;t submit your request right now. Please check your connection and try
+            again, or contact us directly at{' '}
+            <a
+              href={`mailto:${COMPANY.email}`}
+              className="font-medium underline underline-offset-4 hover:text-[#382319] transition-colors break-all"
+            >
+              {COMPANY.email}
+            </a>
+            .
+          </p>
         </div>
       )}
 

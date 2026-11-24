@@ -90,7 +90,7 @@ export function OurTeamPage() {
     <>
       <SeoHead
         title={`Our Team | Leadership & Management | ${COMPANY.name}`}
-        description="Meet the leadership and team behind R&J Butter Valley (Butter Valley Ltd.), driving quality manufacturing, domestic wholesale partnerships and global food exports."
+        description="Meet the leadership and team behind Butter Valley, driving quality manufacturing, domestic wholesale partnerships and global food exports."
         path="/our-team"
         breadcrumbs={breadcrumbs}
       />

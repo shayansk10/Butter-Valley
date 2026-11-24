@@ -54,7 +54,7 @@ export function QualityPage() {
     <>
       <SeoHead
         title="Quality & Certifications | Halal & PCSIR Tested Exports | Butter Valley Ltd."
-        description="Discover R&J Butter Valley's quality control standards, Halal certification (htc/RJBV/2022/1), PCSIR test report (ILD/ATR/2022-17512), PSW registration (UN-00-4901518), NTN and Chamber of Commerce membership."
+        description="Discover Butter Valley's quality control standards, Halal certification (htc/RJBV/2022/1), PCSIR test report (ILD/ATR/2022-17512), PSW registration (UN-00-4901518), NTN and Chamber of Commerce membership."
         path="/quality"
         breadcrumbs={breadcrumbs}
       />
@@ -151,7 +151,7 @@ export function QualityPage() {
             </h2>
             <p className="text-base text-[#59351F] leading-relaxed">
               Verified business registrations, Halal certification and PCSIR laboratory reporting
-              held by R&amp;J Butter Valley for domestic and export compliance.
+              held by Butter Valley for domestic and export compliance.
             </p>
           </MotionReveal>
 

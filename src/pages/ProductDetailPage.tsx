@@ -116,6 +116,7 @@ export function ProductDetailPage({ category }: ProductDetailPageProps) {
                   fit={activeSku ? activeSku.imageFit : category.heroImageFit}
                   aspectClass={category.id === 'shilajit' ? 'aspect-video' : 'aspect-square'}
                   imgClassName="object-center"
+                  sizes="(max-width: 1023px) 100vw, 48vw"
                   priority
                 />
               </div>
@@ -161,6 +162,11 @@ export function ProductDetailPage({ category }: ProductDetailPageProps) {
                             compact
                             aspectClass={category.id === 'shilajit' ? 'aspect-video' : 'aspect-square'}
                             imgClassName="object-center"
+                            sizes={
+                              category.id === 'shilajit'
+                                ? '(max-width: 639px) 46vw, 240px'
+                                : '(max-width: 639px) 22vw, 11vw'
+                            }
                           />
                           {category.id === 'shilajit' && (
                             <div className="px-3 py-2 border-t border-[#382319]/10">
@@ -370,6 +376,7 @@ export function ProductDetailPage({ category }: ProductDetailPageProps) {
                     aspectClass="aspect-square"
                     className="!bg-[#241610]"
                     imgClassName="object-[50%_55%]"
+                    sizes="(max-width: 1023px) 100vw, 48vw"
                   />
                 </div>
 
@@ -463,6 +470,7 @@ export function ProductDetailPage({ category }: ProductDetailPageProps) {
                         fit="cover"
                         aspectClass="aspect-square"
                         imgClassName="object-center group-hover:scale-[1.04]"
+                        sizes="(max-width: 1023px) 46vw, 24vw"
                       />
                       <div className="p-3.5 sm:p-4 space-y-1 border-t border-[#C99536]/15 flex-1">
                         <h4
@@ -525,6 +533,11 @@ export function ProductDetailPage({ category }: ProductDetailPageProps) {
                       fit={sku.imageFit}
                       aspectClass={category.id === 'shilajit' ? 'aspect-video' : 'aspect-square'}
                       imgClassName="object-center group-hover:scale-[1.03]"
+                      sizes={
+                        category.id === 'shilajit'
+                          ? '(max-width: 767px) 100vw, 46vw'
+                          : '(max-width: 639px) 46vw, (max-width: 1023px) 32vw, 24vw'
+                      }
                     />
                     <div className={category.id === 'shilajit' ? 'p-6 space-y-2' : 'p-4 space-y-1'}>
                       {category.id === 'shilajit' && sku.note && (
@@ -762,6 +775,7 @@ export function ProductDetailPage({ category }: ProductDetailPageProps) {
                       fit="contain"
                       aspectClass="aspect-square"
                       imgClassName="object-center group-hover:scale-[1.03]"
+                      sizes="(max-width: 767px) 100vw, 32vw"
                     />
                   </Link>
                   <div className="p-6 space-y-2">
