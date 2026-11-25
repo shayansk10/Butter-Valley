@@ -543,11 +543,40 @@ export const IMAGE_MANIFEST: Record<string, ImageManifestEntry> = {
   "/assets/aistudio/Shilajit_Hard_e93697ba.png": {
     "width": 1672,
     "height": 941,
-    "webp": [],
+    "webp": [
+      {
+        "width": 480,
+        "src": "/assets/opt/Shilajit_Hard_e93697ba-480w.webp"
+      },
+      {
+        "width": 960,
+        "src": "/assets/opt/Shilajit_Hard_e93697ba-960w.webp"
+      },
+      {
+        "width": 1440,
+        "src": "/assets/opt/Shilajit_Hard_e93697ba-1440w.webp"
+      },
+      {
+        "width": 1672,
+        "src": "/assets/opt/Shilajit_Hard_e93697ba-1672w.webp"
+      }
+    ],
     "avif": [
+      {
+        "width": 480,
+        "src": "/assets/opt/Shilajit_Hard_e93697ba-480w.avif"
+      },
+      {
+        "width": 960,
+        "src": "/assets/opt/Shilajit_Hard_e93697ba-960w.avif"
+      },
       {
         "width": 1440,
         "src": "/assets/opt/Shilajit_Hard_e93697ba-1440w.avif"
+      },
+      {
+        "width": 1672,
+        "src": "/assets/opt/Shilajit_Hard_e93697ba-1672w.avif"
       }
     ]
   },
